@@ -47,8 +47,8 @@ export default function EcommerceShop() {
   };
 
   return (
-    <Page title="Dashboard: Products | WeTark">
-      <Container>
+    <Page title="Dashboard: Portfolio | WeTark">
+      {/* <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Products
         </Typography>
@@ -74,7 +74,7 @@ export default function EcommerceShop() {
 
         <ProductList products={PRODUCTS} />
         <ProductCartWidget />
-      </Container>
+      </Container> */}
     </Page>
   );
 }

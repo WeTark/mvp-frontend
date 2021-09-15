@@ -1,10 +1,14 @@
-import { useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import * as React from 'react';
+import { Outlet, Navigate, useNavigate } from 'react-router-dom';
 // material
 import { styled } from '@material-ui/core/styles';
 //
+import { useDispatch, useSelector } from 'react-redux';
+// 
+import { SnackbarProvider } from 'notistack5';
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
+import { API } from '../../action/api/api';
 
 // ----------------------------------------------------------------------
 
@@ -33,9 +37,27 @@ const MainStyle = styled('div')(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function DashboardLayout() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+  React.useEffect(()=>{
+    API.fetchUser().then(response=>{
+      dispatch(
+        {
+          type: "USER_REQUEST_SUCCESS",
+          payload:response
+        }
+      )
+    })
+    .catch(e=>{ 
+      navigate('/login', { replace: true });
+    })
+  },[])
 
   return (
+
+    <SnackbarProvider maxSnack={3}>
     <RootStyle>
       <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
       <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
@@ -43,5 +65,6 @@ export default function DashboardLayout() {
         <Outlet />
       </MainStyle>
     </RootStyle>
+    </SnackbarProvider>
   );
 }

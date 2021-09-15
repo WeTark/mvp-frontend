@@ -39,9 +39,9 @@ const TOTAL = 714000;
 export default function AppWeeklySales() {
   return (
     <RootStyle>
-      <IconWrapperStyle>
+      {/* <IconWrapperStyle>
         <Icon icon={androidFilled} width={24} height={24} />
-      </IconWrapperStyle>
+      </IconWrapperStyle> */}
       <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
         Weekly Sales

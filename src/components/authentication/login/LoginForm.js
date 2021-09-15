@@ -17,7 +17,7 @@ import {
 } from '@material-ui/core';
 import { LoadingButton } from '@material-ui/lab';
 import { API } from '../../../action/api/api';
-import {setLocalStorage} from '../../../action/LocalStorageActions';
+import { setLocalStorage, deleteLocalStorage } from '../../../action/LocalStorageActions';
 // ----------------------------------------------------------------------
 
 export default function LoginForm() {
@@ -37,9 +37,10 @@ export default function LoginForm() {
     },
     validationSchema: LoginSchema,
     onSubmit: (values, actions) => {
+      deleteLocalStorage("accessToken")
       API.authenticateUser(values).then(response=>{
         setLocalStorage("accessToken", response.data.accessToken);
-        navigate('/dashboard', { replace: true });
+        navigate('/trade', { replace: true });
         console.log(response);
       }).catch(e => {
         actions.setSubmitting(false);

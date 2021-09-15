@@ -21,8 +21,8 @@ const SORT_OPTIONS = [
 
 export default function Blog() {
   return (
-    <Page title="Dashboard: Blog | WeTark">
-      <Container>
+    <Page title="Dashboard: WatchList | WeTark">
+      {/* <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
             Blog
@@ -47,7 +47,7 @@ export default function Blog() {
             <BlogPostCard key={post.id} post={post} index={index} />
           ))}
         </Grid>
-      </Container>
+      </Container> */}
     </Page>
   );
 }

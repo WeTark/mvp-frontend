@@ -70,10 +70,10 @@ export default function BaseOptionChart() {
     // Colors
     colors: [
       theme.palette.primary.main,
-      theme.palette.warning.main,
       theme.palette.info.main,
-      theme.palette.error.main,
-      theme.palette.success.main
+      // theme.palette.info.main,
+      // theme.palette.error.main,
+      // theme.palette.success.main
     ],
 
     // Chart

@@ -4,13 +4,14 @@ import homeFill from '@iconify/icons-eva/home-fill';
 import personFill from '@iconify/icons-eva/person-fill';
 import settings2Fill from '@iconify/icons-eva/settings-2-fill';
 import { Link as RouterLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 // material
 import { alpha } from '@material-ui/core/styles';
 import { Button, Box, Divider, MenuItem, Typography, Avatar, IconButton } from '@material-ui/core';
 // components
 import MenuPopover from '../../components/MenuPopover';
 //
-import account from '../../_mocks_/account';
+// import account from '../../_mocks_/account';
 
 // ----------------------------------------------------------------------
 
@@ -37,6 +38,7 @@ const MENU_OPTIONS = [
 export default function AccountPopover() {
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
+  const account = useSelector((state) => state.userData);
 
   const handleOpen = () => {
     setOpen(true);
@@ -67,7 +69,7 @@ export default function AccountPopover() {
           })
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar src='/static/mock-images/avatars/avatar_default.jpg' alt="photoURL" />
       </IconButton>
 
       <MenuPopover
@@ -78,7 +80,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {account.username}
+          </Typography>
+          <Typography variant="subtitle2" noWrap>
+            {account.firstName}{" "}{account.lastName}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
             {account.email}

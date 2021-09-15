@@ -7,6 +7,7 @@ import messageCircleFill from '@iconify/icons-eva/message-circle-fill';
 // material
 import { alpha, styled } from '@material-ui/core/styles';
 import { Box, Link, Card, Grid, Avatar, Typography, CardContent } from '@material-ui/core';
+import { LoadingButton } from '@material-ui/lab';
 // utils
 import { fDate } from '../../../utils/formatTime';
 import { fShortenNumber } from '../../../utils/formatNumber';
@@ -45,6 +46,10 @@ const InfoStyle = styled('div')(({ theme }) => ({
   color: theme.palette.text.disabled
 }));
 
+const TradeButtonStyle = styled('div')(({ theme }) => ({
+  marginTop: theme.spacing(1),
+}));
+
 const CoverImgStyle = styled('img')({
   top: 0,
   width: '100%',
@@ -56,20 +61,14 @@ const CoverImgStyle = styled('img')({
 // ----------------------------------------------------------------------
 
 BlogPostCard.propTypes = {
-  post: PropTypes.object.isRequired,
+  event: PropTypes.object.isRequired,
   index: PropTypes.number
 };
 
-export default function BlogPostCard({ post, index }) {
-  const { cover, title, view, comment, share, author, createdAt } = post;
-  const latestPostLarge = index === 0;
-  const latestPost = index === 1 || index === 2;
+export default function BlogPostCard({ event, index }) {
+  const latestPostLarge = false;
+  const latestPost = false;
 
-  const POST_INFO = [
-    { number: comment, icon: messageCircleFill },
-    { number: view, icon: eyeFill },
-    { number: share, icon: shareFill }
-  ];
 
   return (
     <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
@@ -108,8 +107,7 @@ export default function BlogPostCard({ post, index }) {
             }}
           />
           <AvatarStyle
-            alt={author.name}
-            src={author.avatarUrl}
+            // src="/static/ind.svg"
             sx={{
               ...((latestPostLarge || latestPost) && {
                 zIndex: 9,
@@ -121,7 +119,7 @@ export default function BlogPostCard({ post, index }) {
             }}
           />
 
-          <CoverImgStyle alt={title} src={cover} />
+          <CoverImgStyle src="/static/ind.webp" />
         </CardMediaStyle>
 
         <CardContent
@@ -139,11 +137,11 @@ export default function BlogPostCard({ post, index }) {
             variant="caption"
             sx={{ color: 'text.disabled', display: 'block' }}
           >
-            {fDate(createdAt)}
+            {fDate(event.expireAt)}
           </Typography>
 
           <TitleStyle
-            to="#"
+            to={event.id}
             color="inherit"
             variant="subtitle2"
             underline="hover"
@@ -155,13 +153,18 @@ export default function BlogPostCard({ post, index }) {
               })
             }}
           >
-            {title}
+            {event.title}
           </TitleStyle>
 
+          <TradeButtonStyle>
+            <LoadingButton variant="contained">Yes</LoadingButton>
+            <LoadingButton style={{marginLeft:'10px'}} variant="contained">No</LoadingButton>
+          </TradeButtonStyle>
+
           <InfoStyle>
-            {POST_INFO.map((info, index) => (
+
+            {/* {POST_INFO.map((info, index) => ( */}
               <Box
-                key={index}
                 sx={{
                   display: 'flex',
                   alignItems: 'center',
@@ -171,10 +174,58 @@ export default function BlogPostCard({ post, index }) {
                   })
                 }}
               >
-                <Box component={Icon} icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} />
-                <Typography variant="caption">{fShortenNumber(info.number)}</Typography>
+                {/* <Box component={Icon} icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} /> */}
+                <Typography variant="caption">Yes:&nbsp;</Typography>
+                <Typography variant="caption">₹{event.yesPrice}</Typography>
               </Box>
-            ))}
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  ml: index === 0 ? 0 : 1.5,
+                  ...((latestPostLarge || latestPost) && {
+                    color: 'grey.500'
+                  })
+                }}
+              >
+                {/* <Box component={Icon} icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} /> */}
+                <Typography variant="caption">No:&nbsp;</Typography>
+                <Typography variant="caption">₹{event.noPrice}</Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  ml: index === 0 ? 0 : 1.5,
+                  ...((latestPostLarge || latestPost) && {
+                    color: 'grey.500'
+                  })
+                }}
+              >
+                {/* <Box component={Icon} icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} /> */}
+                <Typography variant="caption">Trades:&nbsp;</Typography>
+                <Typography variant="caption">10k</Typography>
+              </Box>
+            {/* ))} */}
+          </InfoStyle>
+          <InfoStyle style={{marginTop: '3px'}}>
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                ml: index === 0 ? 0 : 1.5,
+                ...((latestPostLarge || latestPost) && {
+                  color: 'grey.500'
+                })
+              }}
+            >
+              {/* <Box component={Icon} icon={info.icon} sx={{ width: 16, height: 16, mr: 0.5 }} /> */}
+              <Typography variant="caption">Last Date:&nbsp;</Typography>
+              <Typography variant="caption">08 July 2021</Typography>
+            </Box>
+
           </InfoStyle>
         </CardContent>
       </Card>

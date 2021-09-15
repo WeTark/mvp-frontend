@@ -1,13 +1,13 @@
 import { merge } from 'lodash';
 import ReactApexChart from 'react-apexcharts';
 // material
+import RefreshIcon from '@material-ui/icons/Refresh';
 import { useTheme, styled } from '@material-ui/core/styles';
 import { Card, CardHeader } from '@material-ui/core';
 // utils
 import { fNumber } from '../../../utils/formatNumber';
 //
 import { BaseOptionChart } from '../../charts';
-
 // ----------------------------------------------------------------------
 
 const CHART_HEIGHT = 372;
@@ -31,7 +31,7 @@ const ChartWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const CHART_DATA = [4344, 5435, 1443, 4443];
+const CHART_DATA = [4344, 5435];
 
 export default function AppCurrentVisits() {
   const theme = useTheme();
@@ -40,10 +40,8 @@ export default function AppCurrentVisits() {
     colors: [
       theme.palette.primary.main,
       theme.palette.info.main,
-      theme.palette.warning.main,
-      theme.palette.error.main
     ],
-    labels: ['America', 'Asia', 'Europe', 'Africa'],
+    labels: ['Yes', 'No'],
     stroke: { colors: [theme.palette.background.paper] },
     legend: { floating: true, horizontalAlign: 'center' },
     dataLabels: { enabled: true, dropShadow: { enabled: false } },
@@ -63,7 +61,9 @@ export default function AppCurrentVisits() {
 
   return (
     <Card>
-      <CardHeader title="Current Visits" />
+      <div style={{ textAlign: 'end', padding:"10px", }} >
+        <RefreshIcon style={{cursor:"pointer"}}/>
+      </div>
       <ChartWrapperStyle dir="ltr">
         <ReactApexChart type="pie" series={CHART_DATA} options={chartOptions} height={280} />
       </ChartWrapperStyle>

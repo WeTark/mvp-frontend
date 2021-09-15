@@ -34,7 +34,7 @@ const POST_TITLES = [
 const posts = [...Array(23)].map((_, index) => ({
   id: faker.datatype.uuid(),
   cover: mockImgCover(index + 1),
-  title: POST_TITLES[index + 1],
+  title: POST_TITLES[index],
   createdAt: faker.date.past(),
   view: faker.datatype.number(),
   comment: faker.datatype.number(),

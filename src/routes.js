@@ -11,6 +11,8 @@ import Blog from './pages/Blog';
 import User from './pages/User';
 import NotFound from './pages/Page404';
 import { getLocalStorage } from './action/LocalStorageActions';
+import { EventDetail } from './pages/EventDetail';
+import { PersonalEvent } from './pages/PersonalEvent';
 
 // ----------------------------------------------------------------------
 
@@ -19,14 +21,16 @@ export default function Router() {
 
   return useRoutes([
     {
-      path: '/dashboard',
+      path: '/trade',
       element: token ? <DashboardLayout/> : <Navigate to="/login" />,
       children: [
-        { path: '/', element: <Navigate to="/dashboard/app" replace /> },
-        { path: 'app', element: <DashboardApp /> },
+        { path: '/', element: <Navigate to="/trade/event" replace /> },
+        { path: 'event', element: <DashboardApp />},
+        { path: 'personal-event', element: <PersonalEvent />},
+        { path: 'event/:id', element: <EventDetail/>},
         { path: 'user', element: <User /> },
-        { path: 'products', element: <Products /> },
-        { path: 'blog', element: <Blog /> }
+        { path: 'portfolio', element: <Products /> },
+        { path: 'watchlist', element: <Blog /> }
       ]
     },
     {
@@ -36,7 +40,7 @@ export default function Router() {
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
-        { path: '/', element: <Navigate to="/dashboard" /> },
+        { path: '/', element: <Navigate to="/trade" /> },
         { path: '*', element: <Navigate to="/404" /> }
       ]
     },

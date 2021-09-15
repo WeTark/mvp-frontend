@@ -1,9 +1,14 @@
 // ----------------------------------------------------------------------
+// import { useSelector } from 'react-redux';
 
-const account = {
-  displayName: 'Prabhat Singh',
-  email: 'prabhatnov158@gmail.com',
-  photoURL: '/static/mock-images/avatars/avatar_default.jpg'
-};
+// const UserInfo = () => {
+//   const userData = useSelector((state) => state.userData);
+//   return userData;
+// }
+// const account = {
+//   displayName: UserInfo().firstName,
+//   email: 'prabhatnov158@gmail.com',
+//   photoURL: '/static/mock-images/avatars/avatar_default.jpg'
+// };
 
-export default account;
+// export default account;
