@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 
 import { useMediaQuery } from 'react-responsive';
 // material
@@ -70,6 +70,8 @@ export default function TradeCard({ event, index }) {
   const [tradeType, setTradeType] = React.useState();
   const latestPostLarge = false;
   const latestPost = false;
+  
+  const navigate = useNavigate();
 
   const handleOpen = (tradeType) => {
     setTradeType(tradeType);
@@ -131,7 +133,7 @@ export default function TradeCard({ event, index }) {
             }}
           /> */}
 
-          <CoverImgStyle src={event.picture} />
+          <CoverImgStyle src={event.picture} onClick={()=>{ navigate(`/trade/event/${event.id}`, { replace: true })}} style={{cursor:'pointer'}}/>
         </CardMediaStyle>
 
         <CardContent
