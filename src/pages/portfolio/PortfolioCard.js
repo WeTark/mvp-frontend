@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 // material
 import { alpha, styled } from '@material-ui/core/styles';
 import { Box, Link, Card, Grid, Avatar, Typography, CardContent, Stack, Divider } from '@material-ui/core';
@@ -61,6 +61,7 @@ PortfolioCard.propTypes = {
 export default function PortfolioCard({ event, index }) {
   const latestPostLarge = false;
   const latestPost = false;
+  const navigate = useNavigate();
 
   
   const calculateMatchedAmount = (data) => {
@@ -127,7 +128,7 @@ export default function PortfolioCard({ event, index }) {
             }}
           /> */}
 
-          <CoverImgStyle src={event.picture} />
+          <CoverImgStyle src={event.picture} onClick={()=>{ navigate(`/trade/event/${event.id}`, { replace: true })}} style={{cursor:'pointer'}}/>
         </CardMediaStyle>
 
         <CardContent
