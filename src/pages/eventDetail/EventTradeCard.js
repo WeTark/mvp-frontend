@@ -15,7 +15,7 @@ import { withStyles, createStyles } from '@material-ui/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { alpha, styled } from '@material-ui/core/styles';
-import { Card, Typography, Stack, Container, Avatar, Grid, ListItemText } from '@material-ui/core';
+import { Card, Typography, Stack, Container, Avatar, Grid, ListItemText, CardHeader } from '@material-ui/core';
 // utils
 import { Refresh } from '../../components/_dashboard/app/Refresh';
 
@@ -108,7 +108,7 @@ export default function EventTradeCard(props) {
       </IconWrapperStyle> */}
 
       <Container>
-      
+      <CardHeader title="Current market price" style={{paddingTop:'0px'}}/>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
             <Typography color="rgb(0, 171, 85)">
               <Typography variant="h3">₹{eventData?.event?.yesPrice}</Typography>

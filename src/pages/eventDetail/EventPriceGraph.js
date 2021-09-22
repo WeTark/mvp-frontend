@@ -48,6 +48,7 @@ export default function EventPriceGraph(props) {
       <div style={{ textAlign: 'end', padding:"10px", }} >
         <RefreshIcon style={{cursor:"pointer"}}/>
       </div>
+      <CardHeader title="Price variation with time" style={{paddingTop:'0px'}}/>
       {/* <CardHeader title="Website Visits" subheader="(+43%) than last year" /> */}
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <ReactApexChart type="line" series={CHART_DATA} options={{...chartOptions, labels:Object.keys(graphData)}} height={364} />

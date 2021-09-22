@@ -65,6 +65,7 @@ export default function EventTotalAmount(props) {
       <div style={{ textAlign: 'end', padding:"10px", }} >
         <RefreshIcon style={{cursor:"pointer"}}/>
       </div>
+      <CardHeader title="Amount Invested (Yes/No)" style={{paddingTop:'0px'}}/>
       <ChartWrapperStyle dir="ltr">
         <ReactApexChart type="pie" series={totalAmount} options={chartOptions} height={280} />
       </ChartWrapperStyle>

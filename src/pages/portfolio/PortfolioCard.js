@@ -62,6 +62,22 @@ export default function PortfolioCard({ event, index }) {
   const latestPostLarge = false;
   const latestPost = false;
 
+  
+  const calculateMatchedAmount = (data) => {
+    if(!data){
+      return 0;
+    }
+    return data.totalAmount?data.totalAmount:0
+  }
+
+  const calculatePendingAmount = (data) => {
+    if(!data){
+      return 0;
+    }
+    return data.totalPendingAmount?data.totalPendingAmount:0
+  }
+
+
   return (
     <Grid item xs={12} sm={latestPostLarge ? 12 : 6} md={latestPostLarge ? 6 : 3}>
       <Card sx={{ position: 'relative' }}>
@@ -151,13 +167,13 @@ export default function PortfolioCard({ event, index }) {
 
           <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography color="rgb(0, 171, 85)">
-              <Typography variant="h4">₹{event.amount.YES.totalAmount?event.amount.YES.totalAmount:0}</Typography>
+              <Typography variant="h4">₹{calculateMatchedAmount(event.amount.YES)}</Typography>
               <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
                 Yes
               </Typography>
             </Typography>
             <Typography style={{textAlign:'right'}} color="rgb(24, 144, 255)">
-              <Typography variant="h4" >₹{event.amount.NO.totalAmount?event.amount.NO.totalAmount:0}</Typography>
+              <Typography variant="h4" >₹{calculateMatchedAmount(event.amount.NO)}</Typography>
               <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
                 No
               </Typography>
@@ -166,13 +182,13 @@ export default function PortfolioCard({ event, index }) {
         <Divider orientation="horizontal" flexItem style={{margin:"10px 0 10px 0"}}/>
         <Stack direction="row" alignItems="center" justifyContent="space-between">
             <Typography color="rgb(0, 171, 85)">
-              <Typography variant="h4">₹{event.amount.YES.totalPendingAmount?event.amount.YES.totalPendingAmount:0}</Typography>
+              <Typography variant="h4">₹{calculatePendingAmount(event.amount.YES)}</Typography>
               <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
                 Yes in process
               </Typography>
             </Typography>
             <Typography style={{textAlign:'right'}} color="rgb(24, 144, 255)">
-              <Typography variant="h4" >₹{event.amount.NO.totalPendingAmount?event.amount.NO.totalPendingAmount:0}</Typography>
+              <Typography variant="h4" >₹{calculatePendingAmount(event.amount.NO)}</Typography>
               <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
                 No in process
               </Typography>
