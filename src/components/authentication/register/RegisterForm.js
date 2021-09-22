@@ -29,12 +29,12 @@ export default function RegisterForm() {
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
       .min(2, 'Too Short!')
-      .max(50, 'Too Long!')
+      .max(20, 'Too Long!')
       .required('First name required'),
-    lastName: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Last name required'),
-    username: Yup.string().min(2, 'Too Short!').max(50, 'Too Long!').required('Username required'),
+    lastName: Yup.string().min(2, 'Too Short!').max(20, 'Too Long!').required('Last name required'),
+    username: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Username required'),
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
-    password: Yup.string().required('Password is required')
+    password: Yup.string().min(6, 'Too Short!').required('Password is required')
   });
 
   const formik = useFormik({
@@ -57,7 +57,7 @@ export default function RegisterForm() {
         setIsLoading(false);
       }).catch(e => {
         actions.setSubmitting(false);
-        showToast("Failed! Try again...!", 'error')
+        showToast(e.response.data.message, 'error')
         setIsLoading(false);
       })
     }
