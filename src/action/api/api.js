@@ -3,8 +3,8 @@ import { getLocalStorage } from '../LocalStorageActions';
 
 
 export class API {
-    static baseUrl = 'http://localhost:8080';
-    // static baseUrl = 'https://api.wetark.in';
+    // static baseUrl = 'http://localhost:8080';
+    static baseUrl = 'https://api.wetark.in';
 
     static authenticateUser(data) {
         return axios.post(`${this.baseUrl}/api/auth/signin`, data,{
