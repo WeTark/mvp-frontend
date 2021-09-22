@@ -23,20 +23,20 @@ const sidebarConfig = [
     icon: getIcon("bi:calendar-event-fill")
   },
   {
-    title: 'profile',
-    path: '/trade/user',
-    icon: getIcon(peopleFill)
-  },
-  {
     title: 'portfolio',
     path: '/trade/portfolio',
     icon: getIcon(shoppingBagFill)
   },
   {
-    title: 'watchlist',
-    path: '/trade/watchlist',
-    icon: getIcon(fileTextFill)
+    title: 'profile',
+    path: '/trade/user',
+    icon: getIcon(peopleFill)
   },
+  // {
+  //   title: 'watchlist',
+  //   path: '/trade/watchlist',
+  //   icon: getIcon(fileTextFill)
+  // },
   // {
   //   title: 'login',
   //   path: '/login',

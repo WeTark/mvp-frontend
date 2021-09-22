@@ -94,7 +94,7 @@ export default function BlogPostCard({ event, index }) {
             })
           }}
         >
-          <SvgIconStyle
+          {/* <SvgIconStyle
             color="paper"
             src="/static/icons/shape-avatar.svg"
             sx={{
@@ -105,8 +105,8 @@ export default function BlogPostCard({ event, index }) {
               position: 'absolute',
               ...((latestPostLarge || latestPost) && { display: 'none' })
             }}
-          />
-          <AvatarStyle
+          /> */}
+          {/* <AvatarStyle
             // src="/static/ind.svg"
             sx={{
               ...((latestPostLarge || latestPost) && {
@@ -117,7 +117,7 @@ export default function BlogPostCard({ event, index }) {
                 height: 40
               })
             }}
-          />
+          /> */}
 
           <CoverImgStyle src="/static/ind.webp" />
         </CardMediaStyle>

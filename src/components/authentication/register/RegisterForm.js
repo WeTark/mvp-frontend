@@ -1,6 +1,7 @@
 import * as Yup from 'yup';
-import { useState } from 'react';
+import React from 'react';
 import { Icon } from '@iconify/react';
+import { useSnackbar } from 'notistack5';
 import { useFormik, Form, FormikProvider } from 'formik';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
@@ -10,12 +11,20 @@ import { Stack, TextField, IconButton, InputAdornment } from '@material-ui/core'
 import { LoadingButton } from '@material-ui/lab';
 import { API } from '../../../action/api/api';
 import { setLocalStorage, deleteLocalStorage } from '../../../action/LocalStorageActions';
+import BackdropElement from '../../../pages/common/BackdropElement';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const { enqueueSnackbar } = useSnackbar();
+
+  const showToast = (message, variant1) => {
+    // variant could be success, error, warning, info, or default
+    enqueueSnackbar(message, {variant: variant1});
+  };
 
   const RegisterSchema = Yup.object().shape({
     firstName: Yup.string()
@@ -39,13 +48,17 @@ export default function RegisterForm() {
     },
     validationSchema: RegisterSchema,
     onSubmit: (values, actions) => {
+      setIsLoading(true);
+      showToast("Registering...!", 'info')
       deleteLocalStorage("accessToken")
       API.registerUser(values).then(response=>{
         setLocalStorage("accessToken", response.data.accessToken);
         navigate('/trade', { replace: true });
-        console.log(response);
+        setIsLoading(false);
       }).catch(e => {
         actions.setSubmitting(false);
+        showToast("Failed! Try again...!", 'error')
+        setIsLoading(false);
       })
     }
   });
@@ -54,6 +67,7 @@ export default function RegisterForm() {
 
   return (
     <FormikProvider value={formik}>
+      <BackdropElement isLoading={isLoading}/>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
         <Stack spacing={3}>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>

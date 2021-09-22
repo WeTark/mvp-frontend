@@ -1,6 +1,7 @@
 import { Link as RouterLink, Outlet } from 'react-router-dom';
 // material
 import { styled } from '@material-ui/core/styles';
+import { SnackbarProvider } from 'notistack5';
 // components
 import Logo from '../components/Logo';
 
@@ -23,12 +24,14 @@ const HeaderStyle = styled('header')(({ theme }) => ({
 export default function LogoOnlyLayout() {
   return (
     <>
-      <HeaderStyle>
-        <RouterLink to="/">
-          <Logo />
-        </RouterLink>
-      </HeaderStyle>
-      <Outlet />
+      <SnackbarProvider maxSnack={3}>
+        <HeaderStyle>
+          <RouterLink to="/">
+            <Logo />
+          </RouterLink>
+        </HeaderStyle>
+        <Outlet />
+      </SnackbarProvider>
     </>
   );
 }

@@ -5,10 +5,10 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 //
 import Login from './pages/Login';
 import Register from './pages/Register';
-import DashboardApp from './pages/DashboardApp';
-import Products from './pages/Products';
-import Blog from './pages/Blog';
-import User from './pages/User';
+import Trade from './pages/Trade';
+import Portfolio from './pages/Portfolio';
+import Watchlist from './pages/Watchlist';
+import Profile from './pages/Profile';
 import NotFound from './pages/Page404';
 import { getLocalStorage } from './action/LocalStorageActions';
 import { EventDetail } from './pages/EventDetail';
@@ -25,12 +25,12 @@ export default function Router() {
       element: token ? <DashboardLayout/> : <Navigate to="/login" />,
       children: [
         { path: '/', element: <Navigate to="/trade/event" replace /> },
-        { path: 'event', element: <DashboardApp />},
+        { path: 'event', element: <Trade />},
         { path: 'personal-event', element: <PersonalEvent />},
         { path: 'event/:id', element: <EventDetail/>},
-        { path: 'user', element: <User /> },
-        { path: 'portfolio', element: <Products /> },
-        { path: 'watchlist', element: <Blog /> }
+        { path: 'user', element: <Profile /> },
+        { path: 'portfolio', element: <Portfolio /> },
+        { path: 'watchlist', element: <Watchlist /> }
       ]
     },
     {
