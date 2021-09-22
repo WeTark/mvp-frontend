@@ -127,7 +127,7 @@ export default function PortfolioCard({ event, index }) {
             }}
           /> */}
 
-          <CoverImgStyle src="/static/ind.webp" />
+          <CoverImgStyle src={event.picture} />
         </CardMediaStyle>
 
         <CardContent
