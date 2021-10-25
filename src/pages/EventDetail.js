@@ -1,5 +1,6 @@
 import * as React from "react";
 import {useParams} from "react-router-dom";
+import { useSelector } from 'react-redux';
 import { Container, Grid } from '@material-ui/core';
 import Page from '../components/Page';
 import AppWeeklySales from '../components/_dashboard/app/AppWeeklySales';
@@ -19,6 +20,7 @@ import { API } from "../action/api/api";
 import BackdropElement from './common/BackdropElement';
 import EventTotalAmount from "./eventDetail/EventTotalAmount";
 import EventPriceGraph from './eventDetail/EventPriceGraph';
+import RCIframe from './common/RCIframe';
 
 
 export const EventDetail = (props) => {
@@ -27,6 +29,8 @@ export const EventDetail = (props) => {
     const [isLoading, setIsLoading] = React.useState(true);
     const [ totalAmount, setTotalAmount] = React.useState([]);
     const [ graphData, setGraphData] = React.useState({});
+
+    const account = useSelector((state) => state.userData);
 
     React.useEffect(()=>{
         API.fetchEventByID(id, 0, 20).then(response=>{
@@ -58,12 +62,16 @@ export const EventDetail = (props) => {
         <BackdropElement isLoading={isLoading}/>
         <Container maxWidth="xl">
         <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={8}>
+            <Grid item xs={12} sm={6} md={4}>
                 <EventDetailCard event={event.event} refreshData={refreshData} setIsLoading={setIsLoading}/>
             </Grid>
             <Grid item xs={12} sm={6} md={4}>
                 <EventTradeCard eventData = {event} refreshData={refreshData}/>
             </Grid>
+            <Grid item xs={12} sm={6} md={4}>
+                <RCIframe rocketChatToken = {account.rocketChatToken}/>
+            </Grid>
+
 
             <Grid item xs={12} md={6} lg={8}>
             <EventPriceGraph  graphData={graphData}/>

@@ -1,25 +1,27 @@
 // material
-import { Box, Grid, Container, Typography } from "@material-ui/core";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 import React from "react";
+import { useSelector } from 'react-redux';
+import IframeComm from "react-iframe-comm";
+import ReactDOM from 'react-dom';
+import { AppBar, Tabs, Tab, CircularProgress, Box, Grid, Container, Typography } from "@material-ui/core";
 import TradeCard from "./trade/TradeCard";
 import { API } from "../action/api/api";
 // components
 import Page from "../components/Page";
 import BackdropElement from "./common/BackdropElement";
+import RCIframe from "./common/RCIframe";
 
-import List from "@mui/material/List";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItem from "@mui/material/ListItem";
-import { AppBar, Tabs, Tab } from "@material-ui/core";
 
 // ----------------------------------------------------------------------
 
 export default function Trade() {
   const [eventList, setEventList] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
+  // const [rcIframe, setRcIframe] = React.useState(0);
+
+  // let count = 0;
+  
   React.useEffect(() => {
     API.fetchAllEvents(0, 10)
       .then((response) => {
@@ -31,6 +33,7 @@ export default function Trade() {
       });
   }, []);
 
+  
   return (
     <Page title="Dashboard | WeTark">
       <BackdropElement isLoading={isLoading} />
@@ -46,7 +49,9 @@ export default function Trade() {
           <Tab label="Crypto" />
           <Tab label="Gaming" />
         </Tabs>
+        
         <Grid container spacing={3}>
+        {/* <button onClick={rcLogin}>Login</button> */}
           {eventList.map((event, index) => (
             <TradeCard key={event.id} event={event} index={index} />
           ))}

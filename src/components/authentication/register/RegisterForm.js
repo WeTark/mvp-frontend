@@ -32,7 +32,9 @@ export default function RegisterForm() {
       .max(20, 'Too Long!')
       .required('First name required'),
     lastName: Yup.string().min(2, 'Too Short!').max(20, 'Too Long!').required('Last name required'),
-    username: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Username required'),
+
+    username: Yup.string().min(3, 'Too Short!').max(20, 'Too Long!').required('Username required').matches('^[0-9A-Za-z_.-]+$','Use only letters, numbers, dots, hyphens and underscores'),
+
     email: Yup.string().email('Email must be a valid email address').required('Email is required'),
     password: Yup.string().min(6, 'Too Short!').required('Password is required')
   });

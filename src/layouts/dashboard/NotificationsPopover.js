@@ -1,3 +1,4 @@
+import * as React from "react";
 import faker from 'faker';
 import PropTypes from 'prop-types';
 import { noCase } from 'change-case';
@@ -30,6 +31,7 @@ import { mockImgAvatar } from '../../utils/mockImages';
 // components
 import Scrollbar from '../../components/Scrollbar';
 import MenuPopover from '../../components/MenuPopover';
+import { API } from '../../action/api/api';
 
 // ----------------------------------------------------------------------
 
@@ -84,9 +86,9 @@ const NOTIFICATIONS = [
 function renderContent(notification) {
   const title = (
     <Typography variant="subtitle2">
-      {notification.title}
+      {notification.notificationType}
       <Typography component="span" variant="body2" sx={{ color: 'text.secondary' }}>
-        &nbsp; {noCase(notification.description)}
+        &nbsp; {notification.title}
       </Typography>
     </Typography>
   );
@@ -130,14 +132,14 @@ function NotificationItem({ notification }) {
 
   return (
     <ListItemButton
-      to="#"
+      to={`/trade/event/${notification.url}`}
       disableGutters
       component={RouterLink}
       sx={{
         py: 1.5,
         px: 2.5,
         mt: '1px',
-        ...(notification.isUnRead && {
+        ...(notification.readStatus && {
           bgcolor: 'action.selected'
         })
       }}
@@ -158,7 +160,7 @@ function NotificationItem({ notification }) {
             }}
           >
             <Box component={Icon} icon={clockFill} sx={{ mr: 0.5, width: 16, height: 16 }} />
-            {formatDistanceToNow(new Date(notification.createdAt))}
+            {/* {formatDistanceToNow(new Date(notification.createdAt))} */}
           </Typography>
         }
       />
@@ -167,11 +169,20 @@ function NotificationItem({ notification }) {
 }
 
 export default function NotificationsPopover() {
+  
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
-  const [notifications, setNotifications] = useState(NOTIFICATIONS);
-  const totalUnRead = notifications.filter((item) => item.isUnRead === true).length;
+  const [notifications, setNotifications] = useState([]);
+  const [totalUnRead, setTotalUnRead] = useState(0);
 
+  React.useEffect(()=>{
+    API.fetchUserNotification().then(response=>{
+      setNotifications(response.data);
+      setTotalUnRead(response.data.filter((item) => item.readStatus !== true).length)
+    }).catch(e=>{
+    })
+  },[])
+  
   const handleOpen = () => {
     setOpen(true);
   };

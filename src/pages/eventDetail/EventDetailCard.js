@@ -19,14 +19,10 @@ import { makeStyles, createStyles } from "@material-ui/styles";
 import Modal from "@material-ui/core/Modal";
 import ReactHtmlParser from "react-html-parser";
 import { useSnackbar } from "notistack5";
-//import IconButton from "@mui/material/IconButton";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import TradeForm from "./TradeForm";
 import { API } from "../../action/api/api";
 import BackdropElement from "../common/BackdropElement";
-
-import Popup from "reactjs-popup";
 
 const useStyles = makeStyles({
   media: {
@@ -147,10 +143,7 @@ export default function EventDetailCard(props) {
                   Create personal event
                 </Button>
               </div>
-              <div
-                onClick={() => {
-                  // navigator.clipboard.writeText(document.URL);
-                }}
+              {/* <div
                 style={{ cursor: "pointer" }}
               >
                 {copy ? (
@@ -165,12 +158,8 @@ export default function EventDetailCard(props) {
                     <DoneIcon style={{ color: "green" }} />
                     <h4 style={{ color: "green" }}>Copied</h4>
                   </>
-                  // <IconButton aria-label="Example">
-                  //   <FontAwesomeIcon icon={DoneIcon} />
-                  // </IconButton>
                 )}
-                {/* <ShareIcon /> */}
-              </div>
+              </div> */}
             </div>
           </>
         ) : (

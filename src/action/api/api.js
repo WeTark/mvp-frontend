@@ -117,4 +117,24 @@ export class API {
         });
     };
     
+
+    static fetchUserBalance() {
+        return axios.get(`${this.baseUrl}/user/balance`,{
+            headers: {
+                Authorization: getLocalStorage("accessToken")
+            },
+            withCredentials: true,
+        });
+    };
+    
+
+    static fetchUserNotification() {
+        return axios.get(`${this.baseUrl}/user/notification`,{
+            headers: {
+                Authorization: getLocalStorage("accessToken")
+            },
+            withCredentials: true,
+        });
+    };
+    
 }
