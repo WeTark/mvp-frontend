@@ -36,17 +36,17 @@ export default function Router() {
       ],
     },
     {
-      path: "/login",
+      path: "/",
       element: <LogoOnlyLayout />,
       children: [
-        { path: "", element: <Login /> },
-        // { path: "register", element: <Register /> },
-        // { path: "404", element: <NotFound /> },
-        // { path: "/", element: <Landing/> },
-        // { path: "*", element: <Navigate to="/404" /> },
+        { path: "login", element: <Login /> },
+        { path: "register", element: <Register /> },
+        { path: "404", element: <NotFound /> },
+        { path: "/", element: <Navigate to="/trade" /> },
+        { path: "*", element: <Navigate to="/404" /> },
       ],
     },
 
-    // { path: "*", element: <Navigate to="/404" replace /> },
+    { path: "*", element: <Navigate to="/404" replace /> },
   ]);
 }
