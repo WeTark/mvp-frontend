@@ -42,7 +42,7 @@ export default function Router() {
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
         { path: "404", element: <NotFound /> },
-        { path: "/", element: <Navigate to="/trade" /> },
+        // { path: "/", element: <Navigate to="/trade" /> },
         { path: "*", element: <Navigate to="/404" /> },
       ],
     },
